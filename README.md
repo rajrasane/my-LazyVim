@@ -29,17 +29,3 @@ This repository contains a Dockerized Neovim setup with LazyVim, ensuring a cons
     }
     ```
     After adding, run `source ~/.bashrc` (or open a new terminal) to apply the changes.
-
-## Customization
-
-Your custom LazyVim configurations (plugins, keymaps, etc.) should be placed in the `lua/custom` directory within this repository. These will be automatically picked up by LazyVim when you run `nvimd`.
-
-For example, to add a new plugin, you would create a file like `lua/custom/plugins/my-plugin.lua`.
-
-```lua
-return {
-  "owner/my-plugin",
-  name = "My Plugin",
-  -- further configuration
-}
-```
