@@ -6,7 +6,7 @@ This repository contains a Dockerized Neovim setup with LazyVim, ensuring a cons
 
 1.  **Clone this repository:**
     ```bash
-    git clone <this_repository_url>
+    git clone git@github.com:rajrasane/my-LazyVim.git
     cd my-LazyVim
     ```
 
