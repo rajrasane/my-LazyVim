@@ -32,6 +32,8 @@ This repository contains a Docker-based setup for [LazyVim](https://www.lazyvim.
         -v "$(pwd)":/root/work \
         -v lazyvim-data:/root/.local/share/nvim \
         -v lazyvim-cache:/root/.cache/nvim \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v /etc/timezone:/etc/timezone:ro \
         -w /root/work \
         lazyvim nvim "$@"
     }
