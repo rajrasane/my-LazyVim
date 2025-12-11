@@ -1,13 +1,20 @@
-# My LazyVim Docker Setup
+# Dockerized LazyVim Setup
 
-This repository contains a Dockerized Neovim setup with LazyVim, ensuring a consistent and reproducible development environment.
+This repository contains a Docker-based setup for [LazyVim](https://www.lazyvim.org/), a powerful Neovim configuration. It allows you to run a consistent, feature-rich Neovim environment on any machine with Docker installed, keeping your configuration and plugins persistent.
 
-## Setup Instructions
+## Features
 
-1.  **Clone this repository:**
+- **Persistent Configuration:** Your plugins and settings are stored in a Docker volume (`lazyvim-data`), so they survive container restarts.
+- **Isolated Environment:** Runs in a container, keeping your host system clean.
+- **Pre-installed Tools:** Includes `git`, `lazygit`, `ripgrep`, `fd`, `curl`, `tree-sitter-cli`, `gcc`, and `unzip`.
+- **Easy Alias:** Includes a shell function `nvimd` for seamless integration.
+
+## Installation
+
+1.  **Clone the repository:**
     ```bash
-    git clone git@github.com:rajrasane/my-LazyVim.git
-    cd my-LazyVim
+    git clone https://github.com/rajrasane/my-LazyVim.git ~/lazyvim-docker
+    cd ~/lazyvim-docker
     ```
 
 2.  **Build the Docker image:**
@@ -15,10 +22,11 @@ This repository contains a Dockerized Neovim setup with LazyVim, ensuring a cons
     docker build -t lazyvim .
     ```
 
-3.  **Add the `nvimd` function to your shell configuration (e.g., `~/.bashrc`):**
-    This function allows you to run Neovim inside the Docker container, mounting your current working directory and persisting LazyVim's data.
+3.  **Add the alias to your shell:**
+    Add the following function to your `~/.bashrc` or `~/.zshrc`:
 
     ```bash
+    # Dockerized Neovim with LazyVim
     nvimd() {
       docker run -it --rm \
         -v "$(pwd)":/root/work \
@@ -28,4 +36,26 @@ This repository contains a Dockerized Neovim setup with LazyVim, ensuring a cons
         lazyvim nvim "$@"
     }
     ```
-    After adding, run `source ~/.bashrc` (or open a new terminal) to apply the changes.
+
+4.  **Reload your shell:**
+    ```bash
+    source ~/.bashrc
+    ```
+
+## Usage
+
+You can now use `nvimd` just like you would use `nvim`:
+
+- **Open a file:**
+  ```bash
+  nvimd my_file.txt
+  ```
+
+- **Open the current directory:**
+  ```bash
+  nvimd .
+  ```
+
+## Customization
+
+To add your own plugins or change settings, simply use LazyVim as usual. Since the `/root/.local/share/nvim` directory is persisted in the `lazyvim-data` volume, your changes will be saved automatically.
